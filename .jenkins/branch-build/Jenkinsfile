@@ -1,9 +1,5 @@
 pipeline {
     agent {
-        docker {
-            image 'eclipse-temurin:17.0.6_10-jdk-jammy'
-            args '-v /var/run/docker.sock:/var/run/docker.sock -v /home/twitter-clone/.m2:/root/.m2 -u root:root'
-        }
     }
     stages {
         stage('[Backend] Build') {
