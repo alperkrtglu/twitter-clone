@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('[Backend] Build') {
             steps {
-                sh 'echo test3-building!'
+                sh 'echo test4-building!'
             }
         }
     }
