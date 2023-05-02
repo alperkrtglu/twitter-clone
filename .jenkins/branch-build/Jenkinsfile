@@ -1,9 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('[Backend] Build') {
-            steps {
-                sh 'echo test4-building!'
+        stage('Prepare build agent') {
+            agent {
+                docker {
+                    image 'adoptopenjdk/maven-openjdk17'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock -v /home/twitter-clone/.m2:/root/.m2 -u root:root'
+                    reuseNode true
+                }
+            }
+            stages {
+                stage('[Backend] Build') {
+                    steps {
+                        sh './mvnw compile'
+                    }
+                }
             }
         }
     }
