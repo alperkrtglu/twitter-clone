@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Prepare build agent') {
+        stage('[Backend] Prepare build agent') {
             agent {
                 docker {
                     image 'adoptopenjdk/maven-openjdk17'
