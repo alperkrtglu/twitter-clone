@@ -4,20 +4,15 @@ pipeline {
         stage('[Backend] Prepare build agent') {
             agent {
                 docker {
-                    image 'openjdk:17.0.1-jdk-slim'
-                    args '-v /home/twitter-clone/.m2:/root/.m2 --memory=512m'
+                    image 'eclipse-temurin:17-jre-alpine'
+                    args '-v /home/twitter-clone/.m2:/root/.m2 --memory=350m'
                     reuseNode true
                 }
             }
             stages {
                 stage('[Backend] Clean') {
                     steps {
-                        sh './mvnw clean -X -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true'
-                    }
-                }
-                stage('[Backend] Compile') {
-                    steps {
-                        sh './mvnw compile -X -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true'
+                        sh './mvnw clean'
                     }
                 }
             }
