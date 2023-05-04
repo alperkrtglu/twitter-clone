@@ -5,7 +5,7 @@ pipeline {
             agent {
                 docker {
                     image 'openjdk:17.0.1-jdk-slim'
-                    args '-v /home/twitter-clone/.m2:/root/.m2 --memory=256m -u root:root'
+                    args '-v /home/twitter-clone/.m2:/root/.m2 --memory=512m'
                     reuseNode true
                 }
             }
