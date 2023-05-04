@@ -10,9 +10,14 @@ pipeline {
                 }
             }
             stages {
-                stage('[Backend] Build') {
+                stage('[Backend] Clean') {
                     steps {
                         sh './mvnw clean'
+                    }
+                }
+                stage('[Backend] Compile') {
+                    steps {
+                        sh './mvnw compile'
                     }
                 }
             }
