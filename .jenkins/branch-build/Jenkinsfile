@@ -1,20 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('[Backend] Prepare build agent') {
-            agent {
-                docker {
-                    image 'eclipse-temurin:17-jre-alpine'
-                    args '-v /home/twitter-clone/.m2:/root/.m2 --memory=350m'
-                    reuseNode true
-                }
-            }
-            stages {
-                stage('[Backend] Clean') {
-                    steps {
-                        sh './mvnw clean'
-                    }
-                }
+        stage('[Backend] Clean') {
+            steps {
+                sh './mvnw clean'
             }
         }
     }
