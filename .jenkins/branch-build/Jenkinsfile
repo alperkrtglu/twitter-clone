@@ -1,9 +1,12 @@
 pipeline {
     agent any
+    tools {
+        maven 'M3'
+    }
     stages {
         stage('[Backend] Clean') {
             steps {
-                sh './mvnw clean'
+                sh 'mvn -version'
             }
         }
     }
