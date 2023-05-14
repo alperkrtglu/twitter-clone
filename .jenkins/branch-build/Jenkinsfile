@@ -6,7 +6,12 @@ pipeline {
     stages {
         stage('[Backend] Clean') {
             steps {
-                sh 'mvn -version'
+                sh 'mvn clean'
+            }
+        }
+        stage('[Backend] Build') {
+            steps {
+                sh 'mvn compile'
             }
         }
     }
