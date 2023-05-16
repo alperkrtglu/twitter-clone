@@ -12,9 +12,10 @@ pipeline {
             stages {
                 stage('[Backend] Build') {
                     steps {
-                        sh './mvnw compile'
+                        sh './mvnw clean'
                     }
                 }
             }
         }
     }
+}
