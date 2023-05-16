@@ -1,18 +1,20 @@
 pipeline {
     agent any
-    tools {
-        maven 'M3'
-    }
     stages {
-        stage('[Backend] Clean') {
-            steps {
-                sh 'mvn clean'
+        stage('Prepare build agent') {
+            agent {
+                docker {
+                    image 'openjdk:17.0.1-jdk-slim'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock -v /home/twitter-clone/.m2:/root/.m2 -u root:root'
+                    reuseNode true
+                }
             }
-        }
-        stage('[Backend] Build') {
-            steps {
-                sh 'mvn compile'
+            stages {
+                stage('[Backend] Build') {
+                    steps {
+                        sh './mvnw compile'
+                    }
+                }
             }
         }
     }
-}
