@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
     stages {
         stage('Prepare build agent') {
             agent {
@@ -18,6 +18,17 @@ pipeline {
                 stage('[Backend] Compile') {
                     steps {
                         sh './mvnw compile'
+                    }
+                }
+            }
+        }
+        stage('Docker operations') {
+            agent any
+            steps {
+                stage('Check Docker CLI') {
+                    steps {
+                        sh 'docker version'
+                        sh 'which docker || echo Docker CLI not found'
                     }
                 }
                 stage('Build and Push Docker Image') {
