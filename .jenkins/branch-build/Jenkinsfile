@@ -20,6 +20,16 @@ pipeline {
                         sh './mvnw compile'
                     }
                 }
+                stage('[Backend] Push Image') {
+                    steps {
+                        script {
+                            docker.withRegistry('http://localhost:9092/repository/twitter-repository', 'nexus-credentials') {
+                                def application = docker.build("twitter-clone:${env.BUILD_ID}")
+                                application.push()
+                            }
+                        }
+                    }
+                }
             }
         }
     }
