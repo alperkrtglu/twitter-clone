@@ -10,10 +10,6 @@ pipeline {
                 }
             }
             stages {
-                stage('Initialize') {
-                    def dockerHome = tool 'default-docker'
-                    env.PATH = "${dockerHome}/bin:${env.PATH}"
-                }
                 stage('[Backend] Clean') {
                     steps {
                         sh './mvnw clean'
