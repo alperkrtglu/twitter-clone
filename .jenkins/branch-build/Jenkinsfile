@@ -20,21 +20,6 @@ pipeline {
                         sh './mvnw compile'
                     }
                 }
-                stage('Check Docker CLI') {
-                    steps {
-                        sh 'docker version'
-                        sh 'which docker || echo Docker CLI not found'
-                    }
-                }
-                stage('Docker Login Test') {
-                    steps {
-                        withCredentials([usernamePassword(credentialsId: 'nexus-credentials', passwordVariable: 'DOCKER_REGISTRY_PASS', usernameVariable: 'DOCKER_REGISTRY_USER')]) {
-                            sh """
-                                docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASS http://localhost:9092/repository/twitter-repository
-                            """
-                        }
-                    }
-                }
                 stage('Build and Push Docker Image') {
                     steps {
                         script {
