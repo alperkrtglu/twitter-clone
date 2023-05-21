@@ -5,40 +5,31 @@ pipeline {
             agent {
                 docker {
                     image 'openjdk:17.0.1-jdk-slim'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock -v /Users/alperkurtoglu/.m2:/root/.m2 -u root:root'
+                    args '-v /Users/alperkurtoglu/.m2:/root/.m2 -u root:root'
                     reuseNode true
                 }
             }
-            stages {
-                stage('[Backend] Clean') {
-                    steps {
-                        sh './mvnw clean'
-                    }
-                }
-                stage('[Backend] Compile') {
-                    steps {
-                        sh './mvnw compile'
-                    }
-                }
+            steps {
+                sh './mvnw clean'
+                sh './mvnw compile'
             }
         }
         stage('Docker operations') {
-            agent any
+            agent any // Jenkins master veya herhangi bir Jenkins agent üzerinde çalışır
             steps {
-                stage('Check Docker CLI') {
-                    steps {
-                        sh 'docker version'
-                        sh 'which docker || echo Docker CLI not found'
+                script {
+                    sh 'docker version'
+                    sh 'which docker || echo Docker CLI not found'
+
+                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials', passwordVariable: 'DOCKER_REGISTRY_PASS', usernameVariable: 'DOCKER_REGISTRY_USER')]) {
+                        sh """
+                            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASS http://localhost:9092/repository/twitter-repository
+                        """
                     }
-                }
-                stage('Build and Push Docker Image') {
-                    steps {
-                        script {
-                            docker.withRegistry('http://localhost:9092/repository/twitter-repository', 'nexus-credentials') {
-                                def application = docker.build("twitter-clone:${env.BUILD_ID}")
-                                application.push()
-                            }
-                        }
+
+                    docker.withRegistry('http://localhost:9092/repository/twitter-repository', 'nexus-credentials') {
+                        def application = docker.build("twitter-clone:${env.BUILD_ID}")
+                        application.push()
                     }
                 }
             }
