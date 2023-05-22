@@ -23,7 +23,7 @@ pipeline {
                 stage('[Backend] Push Image') {
                     steps {
                         script {
-                            docker.withRegistry('http://localhost:9092/repository/twitter-repository/', 'nexus-credentials') {
+                            docker.withRegistry('http://localhost:9093/repository/twitter-repository/', 'nexus-credentials') {
                                 def application = docker.build("twitter-clone:${env.BUILD_ID}")
                                 application.push()
                             }
