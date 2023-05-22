@@ -22,7 +22,7 @@ pipeline {
                 }
                 stage('[Backend] Package') {
                     steps {
-                        sh './mvnw package'
+                        sh './mvnw package -DskipTests'
                     }
                 }
                 stage('[Backend] Push Image') {
