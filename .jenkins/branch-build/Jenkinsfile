@@ -4,7 +4,7 @@ pipeline {
         stage('Prepare build agent') {
             agent {
                 docker {
-                    image 'cezaalp/jdk17.0.1-jdk-slim-docker-cli'
+                    image 'openjdk:17.0.1-jdk-slim'
                     args '-v /var/run/docker.sock:/var/run/docker.sock -v /Users/alperkurtoglu/.m2:/root/.m2 -u root:root'
                     reuseNode true
                 }
@@ -27,11 +27,8 @@ pipeline {
                 }
                 stage('[Backend] Push Image') {
                     steps {
-                        script {
-                            docker.withRegistry('http://localhost:9093/repository/twitter-repository/', 'nexus-credentials') {
-                                def application = docker.build("twitter-clone:${env.BUILD_ID}")
-                                application.push()
-                            }
+                        withCredentials([usernamePassword(credentialsId: 'nexus-credentials', passwordVariable: 'DOCKER_REGISTRY_PASS', usernameVariable: 'DOCKER_REGISTRY_USER')]) {
+                            sh "./mvnw compile jib:build -Dimage=localhost:9093/repository/twitter-repository/twitter-clone:${env.BUILD_ID} -Djib.to.auth.username=$DOCKER_REGISTRY_USER -Djib.to.auth.password=$DOCKER_REGISTRY_PASS"
                         }
                     }
                 }
