@@ -20,6 +20,11 @@ pipeline {
                         sh './mvnw compile'
                     }
                 }
+                stage('[Backend] Package') {
+                    steps {
+                        sh './mvnw package'
+                    }
+                }
                 stage('[Backend] Push Image') {
                     steps {
                         script {
