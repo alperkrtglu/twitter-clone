@@ -91,7 +91,7 @@
 						<image>openjdk:17.0.1-jdk-slim</image>
 					</from>
 					<to>
-						<image>localhost:9093/repository/twitter-repository/twitter-clone:${env.BUILD_ID}</image>
+						<image>host.docker.internal:9093/repository/twitter-repository/twitter-clone:${project.version}</image>
 						<auth>
 							<username>${env.DOCKER_REGISTRY_USER}</username>
 							<password>${env.DOCKER_REGISTRY_PASS}</password>
