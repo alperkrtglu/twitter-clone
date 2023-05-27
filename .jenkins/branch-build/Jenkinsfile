@@ -28,7 +28,7 @@ pipeline {
                 stage('[Backend] Push Image') {
                     steps {
                         withCredentials([usernamePassword(credentialsId: 'nexus-credentials', passwordVariable: 'DOCKER_REGISTRY_PASS', usernameVariable: 'DOCKER_REGISTRY_USER')]) {
-                            sh "./mvnw compile jib:build -Dimage=http://localhost:9093/repository/twitter-repository/:${env.BUILD_ID} -Djib.to.auth.username=$DOCKER_REGISTRY_USER -Djib.to.auth.password=$DOCKER_REGISTRY_PASS"
+                            sh "./mvnw compile jib:build -Dimage=localhost:9093/repository/twitter-repository/twitter-clone:${env.BUILD_ID} -Djib.to.auth.username=$DOCKER_REGISTRY_USER -Djib.to.auth.password=$DOCKER_REGISTRY_PASS"
                         }
                     }
                 }
