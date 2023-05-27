@@ -90,6 +90,7 @@
 					<from>
 						<image>openjdk:17.0.1-jdk-slim</image>
 					</from>
+					<allowInsecureRegistries>true</allowInsecureRegistries>
 				</configuration>
 			</plugin>
 		</plugins>
