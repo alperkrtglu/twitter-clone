@@ -29,7 +29,7 @@ pipeline {
                     steps {
                         script {
                             docker.withRegistry('http://localhost:9093/repository/twitter-repository/', 'nexus-credentials') {
-                                def application = docker.build("api-gateway:${env.BUILD_ID}")
+                                def application = docker.build("api-gateway:${env.BUILD_ID}", '-f api-gateway/Dockerfile .')
                                 application.push()
                             }
                         }
