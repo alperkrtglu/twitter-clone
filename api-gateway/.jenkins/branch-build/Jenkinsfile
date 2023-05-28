@@ -12,24 +12,24 @@ pipeline {
             stages {
                 stage('[Backend] Clean') {
                     steps {
-                        sh './mvnw clean'
+                        sh './mvnw clean -pl api-gateway'
                     }
                 }
                 stage('[Backend] Compile') {
                     steps {
-                        sh './mvnw compile'
+                        sh './mvnw compile -pl api-gateway'
                     }
                 }
                 stage('[Backend] Package') {
                     steps {
-                        sh './mvnw package -DskipTests'
+                        sh './mvnw package -pl api-gateway -DskipTests'
                     }
                 }
                 stage('[Backend] Push Image') {
                     steps {
                         script {
                             docker.withRegistry('http://localhost:9093/repository/twitter-repository/', 'nexus-credentials') {
-                                def application = docker.build("twitter-clone:${env.BUILD_ID}")
+                                def application = docker.build("api-gateway:${env.BUILD_ID}")
                                 application.push()
                             }
                         }
