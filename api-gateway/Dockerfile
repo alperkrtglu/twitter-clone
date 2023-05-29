@@ -1,6 +1,6 @@
 # First stage: build with Maven Builder
 FROM openjdk:17-jdk-slim as builder
-COPY target/api-gateway-0.0.1-SNAPSHOT.jar app.jar
+COPY api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar app.jar
 RUN java -Djarmode=layertools -jar app.jar extract
 
 # Second stage: production stage
