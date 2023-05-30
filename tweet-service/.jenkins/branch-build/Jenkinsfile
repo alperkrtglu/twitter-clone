@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+    stages {
+        stage('Prepare build agent') {
+            agent {
+                docker {
+                    image 'cezaalp/jdk17.0.1-jdk-slim-docker-cli'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock -v /Users/alperkurtoglu/.m2:/root/.m2 -u root:root'
+                    reuseNode true
+                }
+            }
+            stages {
+                stage('[Backend] Clean') {
+                    steps {
+                        sh './mvnw clean -pl tweet-service'
+                    }
+                }
+                stage('[Backend] Compile') {
+                    steps {
+                        sh './mvnw compile -pl tweet-service'
+                    }
+                }
+                stage('[Backend] Package') {
+                    steps {
+                        sh './mvnw package -pl tweet-service -DskipTests'
+                    }
+                }
+                stage('[Backend] Push Image') {
+                    steps {
+                        script {
+                            docker.withRegistry('http://localhost:9093/repository/twitter-repository/', 'nexus-credentials') {
+                                def application = docker.build("tweet-service:${env.BUILD_ID}", '-f tweet-servicey/Dockerfile .')
+                                application.push()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
