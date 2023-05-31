@@ -1,2 +1,21 @@
 server:
   port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: tweet-service-routing
+          uri: ${service.url.tweet-service}
+          predicates:
+            - Path=/tweet/**
+          filters:
+            - RewritePath=/tweet/(?<segment>.*), /$\{segment}
+            - RemoveRequestHeader=Cookie
+
+# service-url
+service:
+  url:
+    tweet-service: http://localhost:8081
