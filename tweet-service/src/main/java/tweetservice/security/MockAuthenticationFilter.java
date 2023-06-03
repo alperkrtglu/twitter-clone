@@ -1,4 +1,4 @@
-package tweetservice.config;
+package tweetservice.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -14,12 +14,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
-public class DefaultUserSecurityFilter extends OncePerRequestFilter {
+public class MockAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Authentication authentication =
-                new UsernamePasswordAuthenticationToken("admin", "123", List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+                new UsernamePasswordAuthenticationToken("user_id", "123", List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
 
         SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
         securityContext.setAuthentication(authentication);
