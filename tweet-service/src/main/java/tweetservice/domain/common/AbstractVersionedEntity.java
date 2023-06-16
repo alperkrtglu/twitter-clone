@@ -1,12 +1,10 @@
 package tweetservice.domain.common;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Version;
 
 public abstract class AbstractVersionedEntity extends AbstractEntity {
 
     @Version
-    @Column(name = "version")
     private int version = 0;
 
     public AbstractVersionedEntity() {
