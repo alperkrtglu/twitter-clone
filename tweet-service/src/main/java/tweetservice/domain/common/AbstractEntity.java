@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 public abstract class AbstractEntity {
 
     @Id
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @CreatedDate
-    @Column(name = "createdDate", insertable = true, updatable = false)
+    @Column(insertable = true, updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column(name = "lastModifiedData", insertable = false, updatable = true)
+    @Column(insertable = false, updatable = true)
     private LocalDateTime lastModifiedDate;
 
     public AbstractEntity() {
