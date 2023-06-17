@@ -19,7 +19,7 @@ public class MockAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Authentication authentication =
-                new UsernamePasswordAuthenticationToken("user_id", "123", List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+                new UsernamePasswordAuthenticationToken(1001L, "123", List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
 
         SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
         securityContext.setAuthentication(authentication);

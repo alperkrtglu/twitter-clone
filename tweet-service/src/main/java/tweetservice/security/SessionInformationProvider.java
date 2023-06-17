@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SessionInformationProvider {
 
-    public String getCurrentUsername() {
-        return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public Long getCurrentUserId() {
+        return (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

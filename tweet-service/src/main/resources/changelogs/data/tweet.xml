@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+    <changeSet id="tweet_sample_data" author="dev" context="dev">
+        <insert tableName="tweet"> <column name="id" valueNumeric="1001"/> <column name="text" value="This is a test tweet"/> <column name="user_id" valueNumeric="1001"/> </insert>
+        <insert tableName="tweet"> <column name="id" valueNumeric="1002"/> <column name="text" value="Another test tweet"/> <column name="user_id" valueNumeric="1001"/> </insert>
+        <insert tableName="tweet"> <column name="id" valueNumeric="1003"/> <column name="text" value="Yet another test tweet"/> <column name="user_id" valueNumeric="1001"/> </insert>
+    </changeSet>
+</databaseChangeLog>

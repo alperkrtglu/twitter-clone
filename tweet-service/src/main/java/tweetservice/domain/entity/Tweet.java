@@ -4,13 +4,13 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tweetservice.domain.common.AbstractEntity;
+import tweetservice.domain.common.AbstractVersionedEntity;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Tweet extends AbstractEntity {
+public class Tweet extends AbstractVersionedEntity {
 
     private String text;
 

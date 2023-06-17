@@ -13,3 +13,6 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+  liquibase:
+    change-log: '/changelogs/changelog-master.xml'
