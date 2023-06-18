@@ -16,6 +16,5 @@ public class Retweet extends AbstractEntity {
     @JoinColumn(name = "tweet_id", nullable = false)
     private Tweet tweet;
 
-    @Column
     private Long userId;
 }
