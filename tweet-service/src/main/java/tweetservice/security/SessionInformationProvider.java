@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 public class SessionInformationProvider {
 
     public Long getCurrentUserId() {
-        return (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long userId = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (userId == null) {
+            throw new IllegalArgumentException("Invalid user id provided");
+        }
+
+        return userId;
     }
 }

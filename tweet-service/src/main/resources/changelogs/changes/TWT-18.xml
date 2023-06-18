@@ -3,16 +3,52 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
-    <changeSet id="TWT-18 17.06.2023 17:00" author="alper.kurtoglu" context="prod OR dev">
+    <changeSet id="TWT-19 17.06.2023 17:00" author="alper.kurtoglu" context="prod OR dev">
         <createTable tableName="tweet">
             <column name="id" autoIncrement="true" type="bigint" startWith="1001">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="text" type="varchar(1024)"/>
-            <column name="user_id" type="bigint"/>
+            <column name="text" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
             <column name="created_date" type="timestamp" defaultValueComputed="now()"/>
             <column name="last_modified_date" type="timestamp" defaultValueComputed="now()"/>
             <column name="version" type="int" defaultValue="0"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="TWT-19 18.06.2023 22:00" author="alper.kurtoglu" context="prod OR dev">
+        <createTable tableName="like">
+            <column name="id" autoIncrement="true" type="bigint" startWith="1001">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tweet_id" type="bigint">
+                <constraints nullable="false" references="tweet(id)" foreignKeyName="fk_like_tweet"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueComputed="now()"/>
+            <column name="last_modified_date" type="timestamp" defaultValueComputed="now()"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="TWT-19 18.06.2023 10:00" author="alper.kurtoglu" context="prod OR dev">
+        <createTable tableName="retweet">
+            <column name="id" autoIncrement="true" type="bigint" startWith="1001">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tweet_id" type="bigint">
+                <constraints nullable="false" references="tweet(id)" foreignKeyName="fk_retweet_tweet"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueComputed="now()"/>
+            <column name="last_modified_date" type="timestamp" defaultValueComputed="now()"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
