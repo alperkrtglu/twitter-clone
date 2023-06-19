@@ -19,7 +19,10 @@ public class TweetService {
 
     @Transactional(readOnly = true)
     public List<Tweet> retrieve(Long userId) {
-        return tweetRepository.findAllByUserId(userId);
+        List<Tweet> tweets = tweetRepository.findAllWithLikesByUserId(userId);
+
+        return !tweets.isEmpty() ?
+                tweetRepository.findAllWithRetweetsByUserId(userId) : tweets;
     }
 
     @Transactional

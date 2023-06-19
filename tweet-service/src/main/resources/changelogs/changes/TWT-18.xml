@@ -21,12 +21,12 @@
     </changeSet>
 
     <changeSet id="TWT-19 18.06.2023 22:00" author="alper.kurtoglu" context="prod OR dev">
-        <createTable tableName="like">
+        <createTable tableName="likes">
             <column name="id" autoIncrement="true" type="bigint" startWith="1001">
                 <constraints primaryKey="true"/>
             </column>
             <column name="tweet_id" type="bigint">
-                <constraints nullable="false" references="tweet(id)" foreignKeyName="fk_like_tweet"/>
+                <constraints nullable="false" references="tweet(id)" foreignKeyName="fk_likes_tweet"/>
             </column>
             <column name="user_id" type="bigint">
                 <constraints nullable="false"/>
