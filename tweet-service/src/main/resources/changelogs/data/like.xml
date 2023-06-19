@@ -4,6 +4,6 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
     <changeSet id="like_sample_data" author="dev" context="dev">
-        <insert tableName="like"> <column name="id" value="1001"/> <column name="tweet_id" value="1001"/> <column name="user_id" value="1001"/> </insert>
+        <insert tableName="likes"> <column name="id" value="1001"/> <column name="tweet_id" value="1001"/> <column name="user_id" value="1001"/> </insert>
     </changeSet>
 </databaseChangeLog>

@@ -10,6 +10,7 @@ import tweetservice.domain.common.AbstractEntity;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "Likes")
 public class Like extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
