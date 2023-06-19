@@ -1,5 +1,6 @@
 package tweetservice.domain.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -20,10 +21,10 @@ public class Tweet extends AbstractVersionedEntity {
 
     private Long userId;
 
-    @OneToMany(mappedBy = "tweet")
+    @OneToMany(mappedBy = "tweet", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Like> likes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "tweet")
+    @OneToMany(mappedBy = "tweet", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Retweet> retweets = new ArrayList<>();
 
     public Tweet(String text, Long userId) {
