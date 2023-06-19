@@ -16,6 +16,7 @@ public class SecurityConfig {
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .addFilterAfter(mockAuthenticationFilter(), BasicAuthenticationFilter.class)
+                .csrf().disable()
                 .build();
     }
 
