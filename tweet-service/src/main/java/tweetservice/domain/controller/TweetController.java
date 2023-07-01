@@ -1,6 +1,7 @@
 package tweetservice.domain.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tweetservice.domain.dto.TweetAddUpdateRequestDTO;
 import tweetservice.domain.dto.TweetViewResponseDTO;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("tweets")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ROLE_USER')")
 public class TweetController {
 
     private final SessionInformationProvider sessionInformationProvider;
