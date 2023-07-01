@@ -14,5 +14,15 @@ spring:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
       ddl-auto: none
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${service.url.keycloak}/realms/twitter-clone
   liquibase:
     change-log: '/changelogs/changelog-master.xml'
+
+# service-url
+service:
+  url:
+    keycloak: http://localhost:8085
