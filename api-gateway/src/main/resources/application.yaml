@@ -1,11 +1,33 @@
 server:
   port: 8080
 
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
 spring:
   application:
     name: api-gateway
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: twitter-clone
+            client-secret: cPQmqqW6RsNAs0jMA7cT7qXzgdWxe12t
+            authorization-grant-type: authorization_code
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: ${service.url.keycloak}/realms/twitter-clone
   cloud:
     gateway:
+      default-filters:
+        - TokenRelay=
+        - RemoveRequestHeader=Cookie
       routes:
         - id: tweet-service-routing
           uri: ${service.url.tweet-service}
@@ -13,9 +35,9 @@ spring:
             - Path=/tweet/**
           filters:
             - RewritePath=/tweet/(?<segment>.*), /$\{segment}
-            - RemoveRequestHeader=Cookie
 
 # service-url
 service:
   url:
     tweet-service: http://localhost:8081
+    keycloak: http://localhost:8085
