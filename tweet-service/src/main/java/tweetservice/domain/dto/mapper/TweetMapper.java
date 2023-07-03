@@ -10,7 +10,7 @@ import java.util.List;
 @UtilityClass
 public class TweetMapper {
 
-    public Tweet dtoToEntity(final TweetAddUpdateRequestDTO dto, final Long userId) {
+    public Tweet dtoToEntity(final TweetAddUpdateRequestDTO dto, final String userId) {
         return new Tweet(dto.text(), userId);
     }
 

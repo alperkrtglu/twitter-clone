@@ -23,15 +23,19 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable);
-        http
-                .authorizeHttpRequests()
-                .anyRequest().authenticated().and()
-                .oauth2ResourceServer()
-                .jwt()
-                .jwtAuthenticationConverter(customJwtAuthenticationConverter());
-        //    .addFilterAfter(mockAuthenticationFilter(), BasicAuthenticationFilter.class)
-        return http.build();
+
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(requests ->
+                        requests
+                                .anyRequest().authenticated()
+                )
+                .oauth2ResourceServer(oauth2 ->
+                        oauth2.jwt(jwt ->
+                                jwt.jwtAuthenticationConverter(customJwtAuthenticationConverter())
+                        )
+                )
+                .build();
     }
 
     @Bean
@@ -41,20 +45,15 @@ public class SecurityConfig {
         return converter;
     }
 
-//    @Bean
-//    public MockAuthenticationFilter mockAuthenticationFilter() {
-//        return new MockAuthenticationFilter();
-//    }
-
-    private class KeycloakJwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
+    private final class KeycloakJwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
         @Override
+        @SuppressWarnings("unchecked")
         public Collection<GrantedAuthority> convert(Jwt jwt) {
             var realmAccess = (Map<String, List<String>>) jwt.getClaim("realm_access");
 
             return realmAccess.get("roles").stream()
-                    .map(role -> "ROLE_" + role)
-                    .map(SimpleGrantedAuthority::new)
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                     .collect(Collectors.toList());
         }
 
