@@ -19,7 +19,7 @@ public class Tweet extends AbstractVersionedEntity {
 
     private String text;
 
-    private Long userId;
+    private String userId;
 
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Like> likes = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Tweet extends AbstractVersionedEntity {
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Retweet> retweets = new ArrayList<>();
 
-    public Tweet(String text, Long userId) {
+    public Tweet(String text, String userId) {
         this.text = text;
         this.userId = userId;
     }

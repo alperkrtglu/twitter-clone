@@ -11,7 +11,7 @@
             <column name="text" type="varchar(1024)">
                 <constraints nullable="false"/>
             </column>
-            <column name="user_id" type="bigint">
+            <column name="user_id" type="varchar(36)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_date" type="timestamp" defaultValueComputed="now()"/>

@@ -4,8 +4,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
     <changeSet id="tweet_sample_data" author="dev" context="dev">
-        <insert tableName="tweet"> <column name="id" valueNumeric="1001"/> <column name="text" value="This is a test tweet"/> <column name="user_id" valueNumeric="1001"/> </insert>
-        <insert tableName="tweet"> <column name="id" valueNumeric="1002"/> <column name="text" value="Another test tweet"/> <column name="user_id" valueNumeric="1001"/> </insert>
-        <insert tableName="tweet"> <column name="id" valueNumeric="1003"/> <column name="text" value="Yet another test tweet"/> <column name="user_id" valueNumeric="1001"/> </insert>
+        <insert tableName="tweet"> <column name="id" valueNumeric="1001"/> <column name="text" value="This is a test tweet"  /> <column name="user_id" value="4231a1f1-8da3-4d01-8603-f54eb1024a4c"/> </insert>
+        <insert tableName="tweet"> <column name="id" valueNumeric="1002"/> <column name="text" value="Another test tweet"    /> <column name="user_id" value="4231a1f1-8da3-4d01-8603-f54eb1024a4c"/> </insert>
+        <insert tableName="tweet"> <column name="id" valueNumeric="1003"/> <column name="text" value="Yet another test tweet"/> <column name="user_id" value="4231a1f1-8da3-4d01-8603-f54eb1024a4c"/> </insert>
     </changeSet>
 </databaseChangeLog>

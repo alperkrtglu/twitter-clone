@@ -18,7 +18,7 @@ public class TweetService {
     private final TweetRepository tweetRepository;
 
     @Transactional(readOnly = true)
-    public List<Tweet> retrieve(Long userId) {
+    public List<Tweet> retrieve(String userId) {
         List<Tweet> tweets = tweetRepository.findAllWithLikesByUserId(userId);
 
         return !tweets.isEmpty() ?
