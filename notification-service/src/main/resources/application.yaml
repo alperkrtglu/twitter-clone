@@ -10,7 +10,7 @@ spring:
         jwt:
           issuer-uri: ${service.url.keycloak}/realms/twitter-clone
 
-# service-url
+# service-url 
 service:
   url:
     keycloak: http://localhost:8085
