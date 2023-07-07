@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class TweetService {
 
     private final TweetRepository tweetRepository;
@@ -28,7 +27,6 @@ public class TweetService {
     @Transactional
     public void add(Tweet tweet) {
         tweetRepository.save(tweet);
-        log.info("Tweet created! Tweet Id: {}", tweet.getId());
     }
 
     @Transactional
@@ -37,12 +35,10 @@ public class TweetService {
                 .orElseThrow(() -> new TweetNotFoundException(id));
 
         _tweet.update(tweet);
-        log.info("Tweet updated! Tweet Id: {}", id);
     }
 
     @Transactional
     public void delete(Long id) {
         tweetRepository.deleteById(id);
-        log.info("Tweet deleted! Tweet Id: {}", id);
     }
 }
