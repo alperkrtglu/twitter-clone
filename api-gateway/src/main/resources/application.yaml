@@ -16,7 +16,7 @@ spring:
         registration:
           keycloak:
             client-id: twitter-clone
-            client-secret: cPQmqqW6RsNAs0jMA7cT7qXzgdWxe12t
+            client-secret: Rk8tmHmcapQUfRuePzEWdr9Hki6iQtvo
             authorization-grant-type: authorization_code
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
             scope: openid
