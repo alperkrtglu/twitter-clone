@@ -1,7 +1,11 @@
-package tweetservice.config;
+package security.config;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.Ordered;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,11 +21,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Configuration
+@AutoConfiguration
+@ComponentScan("security")
+@PropertySource(value = "classpath:security.properties")
 @EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
+    @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http
@@ -39,13 +46,14 @@ public class SecurityConfig {
     }
 
     @Bean
+    @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
     public JwtAuthenticationConverter customJwtAuthenticationConverter() {
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-        converter.setJwtGrantedAuthoritiesConverter(new KeycloakJwtGrantedAuthoritiesConverter());
+        converter.setJwtGrantedAuthoritiesConverter(new CustomJwtGrantedAuthoritiesConverter());
         return converter;
     }
 
-    private final class KeycloakJwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
+    private final class CustomJwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
         @Override
         @SuppressWarnings("unchecked")
@@ -62,4 +70,5 @@ public class SecurityConfig {
             return Converter.super.andThen(after);
         }
     }
+
 }

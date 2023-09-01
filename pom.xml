@@ -18,6 +18,7 @@
 		<module>api-gateway</module>
 		<module>tweet-service</module>
         <module>notification-service</module>
+        <module>lib</module>
     </modules>
 
 	<properties>

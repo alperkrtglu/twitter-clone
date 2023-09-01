@@ -5,22 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.project</groupId>
-        <artifactId>twitter-clone</artifactId>
+        <artifactId>lib</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>notification-service</artifactId>
+    <artifactId>security</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.project</groupId>
-            <artifactId>security</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
     </dependencies>
 
