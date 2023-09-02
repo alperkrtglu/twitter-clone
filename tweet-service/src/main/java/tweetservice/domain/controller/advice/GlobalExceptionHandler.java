@@ -1,24 +1,19 @@
 package tweetservice.domain.controller.advice;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import tweetservice.domain.exception.TweetNotFoundException;
-import tweetservice.domain.exception.UserAuthenticationException;
 
 @RestControllerAdvice
+@Order
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(TweetNotFoundException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public String handlerTweetNotFoundException(TweetNotFoundException exception) {
-        return exception.getMessage();
-    }
-
-    @ExceptionHandler(UserAuthenticationException.class)
-    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public String handlerUserAuthenticationException(UserAuthenticationException exception) {
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handlerTweetNotFoundException(Exception exception) {
         return exception.getMessage();
     }
 }
