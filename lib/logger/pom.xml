@@ -5,16 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.project</groupId>
-        <artifactId>twitter-clone</artifactId>
+        <artifactId>lib</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>lib</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>security</module>
-        <module>logger</module>
-    </modules>
+    <artifactId>logger</artifactId>
 
 </project>
