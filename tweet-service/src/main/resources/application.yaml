@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: tweet-service
+  profiles:
+    active: development
   datasource:
     url: jdbc:postgresql://localhost:5432/twt_tweetservice
     username: postgres
