@@ -2,9 +2,22 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 
+    <springProperty name="application.name" source="spring.application.name" />
+    <springProperty name="profiles.active" source="spring.profiles.active"/>
+
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:5602</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>
+                {"appname":"${application.name}","environment":"${profiles.active}"}
+            </customFields>
+        </encoder>
+    </appender>
+
     <springProfile name="development,production">
         <root level="${logback.loglevel:-INFO}">
             <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="LOGSTASH"/>
         </root>
     </springProfile>
 
