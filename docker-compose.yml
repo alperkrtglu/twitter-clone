@@ -8,9 +8,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: q
-      POSTGRES_DB: twitter_clone
     volumes:
       - ~/DockerVolumes/twitter/postgres:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
 
   redis:
