@@ -15,6 +15,7 @@
     <modules>
         <module>security</module>
         <module>logger</module>
+        <module>tracing</module>
     </modules>
 
 </project>
